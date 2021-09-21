@@ -6,29 +6,82 @@ from typing import List
 
 
 def convert_to_absolute(number: float) -> float:
-    return 0
+    if number < 0:
+        number *= -1
+
+    return number
 
 
 def use_prefixes() -> List[str]:
     prefixes, suffixe = 'JKLMNOPQ', 'ack'
-
-    return [""]
+    liste = []
+    for pre in prefixes:
+        liste.append(pre + suffixe)
+    return liste
 
 
 def prime_integer_summation() -> int:
-    return 0
+    prime_list = [2]
+    for i in range(101):
+        for diviseur in range(i - 2):
+            if i % (diviseur + 2) == 0:
+                break
+            elif (diviseur + 2) == (i - 1):
+                prime_list.append(i)
+    somme = 0
+    for prime in prime_list:
+        somme += prime
+    return somme
 
 
 def factorial(number: int) -> int:
-    return 0
+    result = 1
+    for i in range(1, number + 1):
+        result *= i
+    return result
 
 
 def use_continue() -> None:
+    for i in range(11):
+        if i == 5:
+            continue
+        else:
+            print(i)
     pass
 
 
 def verify_ages(groups: List[List[int]]) -> List[bool]:
-    return []
+    acceptance = []
+    someoneIs50 = False
+    someoneIs70 = False
+    allAccepted = True
+    for group in groups:
+        if len(group) > 10 or len(group) <= 3:
+            acceptance.append(False)
+            continue
+        for people in group:
+            if people == 25:
+                acceptance.append(False)
+                allAccepted = False
+                break
+            if people < 18:
+                acceptance.append(False)
+                allAccepted = False
+                break
+            if (people > 70 or people == 50) and (someoneIs50 or someoneIs70):
+                acceptance.append(False)
+                allAccepted = False
+                break
+            if people == 50:
+                someoneIs50 = True
+            elif people > 70:
+                someoneIs70 = True
+        if allAccepted:
+            acceptance.append(True)
+        allAccepted = True
+        someoneIs50 = False
+        someoneIs70 = False
+    return acceptance
 
 
 def main() -> None:
